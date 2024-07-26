@@ -1237,7 +1237,7 @@ class HookedTransformer(HookedRootModule):
         # Get the model name used in HuggingFace, rather than the alias.
         # 官方名只能获取Tlens中规定的几个，并不是HuggingFace所有包的官方名
         # official_model_name = loading.get_official_model_name(model_name)
-
+        official_model_name = model_name
         # Load the config into an HookedTransformerConfig object. If loading from a
         # checkpoint, the config object will contain the information about the
         # checkpoint
