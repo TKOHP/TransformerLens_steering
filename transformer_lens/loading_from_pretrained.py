@@ -721,7 +721,18 @@ def convert_hf_model_config(model_name: str, **kwargs):
             **kwargs,
         )
         architecture = hf_config.architectures[0]
+    # !!!
+    if (Path(model_name) / "config.json").exists():
+        logging.info("从本地获取config配置信息！！！")
 
+        huggingface_token = os.environ.get("HF_TOKEN", None)
+        hf_config = AutoConfig.from_pretrained(
+            official_model_name,
+            token=huggingface_token,
+            **kwargs,
+        )
+        architecture = hf_config.architectures[0]
+    # !!!
     if official_model_name.startswith(
         ("llama-7b", "meta-llama/Llama-2-7b")
     ):  # same architecture for LLaMA and Llama-2
