@@ -42,7 +42,7 @@ def get_device_for_block_index(
     if device.type == "cpu":
         return device
     device_index = (device.index or 0) + (index // layers_per_device)
-    print(device_index)
+
     return torch.device(device.type, device_index)
 
 
