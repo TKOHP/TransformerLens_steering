@@ -55,8 +55,8 @@ from transformer_lens.utils import (
     init_xavier_uniform_,
 )
 import os
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "4,5,6,7"
+# os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "4,5,6,7"
 SingleLoss = Float[torch.Tensor, ""]  # Type alias for a single element tensor
 LossPerToken = Float[torch.Tensor, "batch pos-1"]
 Loss = Union[SingleLoss, LossPerToken]
