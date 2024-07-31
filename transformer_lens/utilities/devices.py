@@ -12,7 +12,7 @@ import torch
 from torch import nn
 
 import transformer_lens
-
+import math
 
 def get_device_for_block_index(
     index: int,
@@ -35,14 +35,21 @@ def get_device_for_block_index(
         torch.device: The device for the specified layer index.
     """
     assert cfg.device is not None
-    layers_per_device = cfg.n_layers // cfg.n_devices
+    # layers_per_device = cfg.n_layers // cfg.n_devices
+    layers_per_device = math.ceil(cfg.n_layers / cfg.n_devices)
     if device is None:
         device = cfg.device
     device = torch.device(device)
     if device.type == "cpu":
         return device
     device_index = (device.index or 0) + (index // layers_per_device)
-
+    # 强制不均匀映射：
+    if index > 0 and index <= 16:
+        device_index = 1
+    elif index > 16 and index < 29:
+        device_index = 2
+    elif index == 29:
+        device_index = 3
     return torch.device(device.type, device_index)
 
 
