@@ -368,10 +368,8 @@ def sample_logits(
     print(logits)
     np.unique(np.array([sample_logits(logits, top_k=2).item() for i in range(1000)]), return_counts=True)
     """
-<<<<<<< Updated upstream
-=======
-    final_logits.to("cuda:0")#
->>>>>>> Stashed changes
+
+    final_logits.to("cuda:0")
     if temperature == 0.0:
         # Greedy sampling
         return final_logits.argmax(dim=-1)
